@@ -16,14 +16,18 @@ angular.module('content-mocks',['ngMockE2E'])
     
     
     $httpBackend.whenPOST('data/public').respond(function(method, url, data) {
-      return [200,'I have received and processed your data [' + data + '].'];
+      if(Math.round((Math.random())) == 1){
+        return [200,'I have received and processed your data [' + data + '].'];
+    		} else {
+    			return [500,'Error occurred with public data'];
+    		}
     });
     $httpBackend.whenPOST('data/protected').respond(function(method, url, data) {
     	if(authorized){
     		if(Math.round((Math.random())) == 1){
         		return [200,'This is confidential [' + data + '].'];
     		} else {
-    			return [500,'Error occurred'];
+    			return [500,'Error occurred with confidential data'];
     		}
         } else {
           return [401];
