@@ -7,6 +7,8 @@ angular.module('angular-auth-demo').controller({
     $scope.publicAction = function() {
       $http.post('data/public', $scope.publicData).success(function(response) {
         $scope.publicContent.push(response);
+      }).error(function(response){
+        $scope.publicContent.push("Error occurred: "+response);
       });
     }
 
@@ -15,7 +17,7 @@ angular.module('angular-auth-demo').controller({
         // this piece of code will not be executed until user is authenticated
         $scope.restrictedContent.push(response);
       }).error(function(response){
-        $scope.publicContent.push("Error occurred: "+response);
+        $scope.restrictedContent.push("Error occurred: "+response);
       });
     }
 
